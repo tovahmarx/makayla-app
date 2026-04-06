@@ -146,7 +146,7 @@ function PublicNav({ onBook, onDashboard }) {
 
 function HeroSection({ onBook }) {
   return (
-    <section className="hero" style={{ backgroundImage: 'url(/portfolio/glamour-red-coat.jpeg)', backgroundSize: 'cover', backgroundPosition: 'center center' }}>
+    <section className="hero">
       <div className="hero-overlay" />
       <div className="hero-content">
         <p className="hero-label">Professional Model &bull; Actress &bull; Influencer</p>

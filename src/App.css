@@ -172,7 +172,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #0A0A0A;
+  background: #0A0A0A url(/portfolio/leather-boots-bw.jpg) center top / cover no-repeat;
   overflow: hidden;
 }
 
@@ -1675,7 +1675,11 @@
   .container { padding: 0 20px; }
 
   /* Hero */
-  .hero { min-height: 100svh; background-position: center center !important; }
+  .hero {
+    min-height: 100svh;
+    background-image: url(/portfolio/glamour-red-coat.jpeg) !important;
+    background-position: center center !important;
+  }
   .hero-content { padding: 0 20px; }
   .hero-title { font-size: 3rem; }
   .hero-sub { font-size: 0.95rem; margin-bottom: 32px; }
