@@ -229,8 +229,12 @@ function AboutSection() {
 function PortfolioSection() {
   const [filter, setFilter] = useState('All')
   const [lightbox, setLightbox] = useState(null)
+  const [showAll, setShowAll] = useState(false)
   const categories = ['All', 'Editorial', 'Fashion', 'Runway', 'Art Nude', 'Creative', 'Digitals', 'Headshots', 'Press']
   const filtered = filter === 'All' ? PORTFOLIO : PORTFOLIO.filter(p => p.category === filter)
+  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768
+  const visible = (!showAll && isMobile) ? filtered.slice(0, 6) : filtered
+  const hasMore = isMobile && !showAll && filtered.length > 6
 
   return (
     <section id="portfolio" className="section-portfolio">
@@ -243,14 +247,14 @@ function PortfolioSection() {
             <button
               key={cat}
               className={`filter-btn ${filter === cat ? 'active' : ''}`}
-              onClick={() => setFilter(cat)}
+              onClick={() => { setFilter(cat); setShowAll(false) }}
             >
               {cat}
             </button>
           ))}
         </div>
         <div className="portfolio-grid">
-          {filtered.map(item => (
+          {visible.map(item => (
             <div key={item.id} className="portfolio-card" onClick={() => setLightbox(item)}>
               <div className="portfolio-card-img">
                 <img src={item.image} alt={item.title} loading="lazy" />
@@ -262,6 +266,20 @@ function PortfolioSection() {
             </div>
           ))}
         </div>
+        {hasMore && (
+          <div className="portfolio-view-more">
+            <button className="btn btn-outline" onClick={() => setShowAll(true)}>
+              View All {filtered.length} Photos <ChevronRight size={16} />
+            </button>
+          </div>
+        )}
+        {showAll && isMobile && filtered.length > 6 && (
+          <div className="portfolio-view-more">
+            <button className="btn btn-outline btn-sm" onClick={() => setShowAll(false)}>
+              Show Less
+            </button>
+          </div>
+        )}
       </div>
       {lightbox && (
         <div className="lightbox" onClick={() => setLightbox(null)}>
