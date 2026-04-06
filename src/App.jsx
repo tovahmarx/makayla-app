@@ -339,10 +339,6 @@ function ContactSection() {
             </p>
             <div className="contact-details">
               <div className="contact-detail">
-                <Mail size={18} />
-                <span>makmodel2003@gmail.com</span>
-              </div>
-              <div className="contact-detail">
                 <Instagram size={18} />
                 <span>@makaylamechelle</span>
               </div>
@@ -436,9 +432,6 @@ function Footer() {
           <div className="footer-social">
             <a href="https://instagram.com/makaylamechelle" target="_blank" rel="noopener">
               <Instagram size={20} />
-            </a>
-            <a href="mailto:makmodel2003@gmail.com">
-              <Mail size={20} />
             </a>
           </div>
         </div>
