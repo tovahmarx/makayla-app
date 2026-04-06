@@ -1675,7 +1675,7 @@
   .container { padding: 0 20px; }
 
   /* Hero */
-  .hero { min-height: 100svh; }
+  .hero { min-height: 100svh; background-position: center center !important; }
   .hero-content { padding: 0 20px; }
   .hero-title { font-size: 3rem; }
   .hero-sub { font-size: 0.95rem; margin-bottom: 32px; }
