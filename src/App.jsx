@@ -337,7 +337,7 @@ function CreditsSection() {
 }
 
 function ContactSection() {
-  const [form, setForm] = useState({ name: '', email: '', service: '', date: '', message: '' })
+  const [form, setForm] = useState({ name: '', email: '', phone: '', service: '', date: '', message: '', references: '' })
   const [submitted, setSubmitted] = useState(false)
 
   const handleSubmit = (e) => {
@@ -424,6 +424,15 @@ function ContactSection() {
                     onChange={e => setForm({ ...form, message: e.target.value })}
                     placeholder="Tell me about your project, timeline, and vision..."
                     required
+                  />
+                </div>
+                <div className="form-group">
+                  <label>References <span style={{ fontWeight: 400, textTransform: 'none', letterSpacing: 0, color: '#888' }}>(optional)</span></label>
+                  <textarea
+                    rows={3}
+                    value={form.references}
+                    onChange={e => setForm({ ...form, references: e.target.value })}
+                    placeholder="Please provide 1-2 professional references (name, company, contact info) or links to your previous work..."
                   />
                 </div>
                 <button type="submit" className="btn btn-accent" style={{ width: '100%' }}>
