@@ -81,13 +81,32 @@ const STATS = {
   eyes: 'Hazel',
 }
 
-const PORTFOLIO_PLACEHOLDER = [
-  { id: 1, title: 'Fashion Editorial', category: 'Fashion' },
-  { id: 2, title: 'Runway Show', category: 'Runway' },
-  { id: 3, title: 'Brand Campaign', category: 'Commercial' },
-  { id: 4, title: 'Magazine Feature', category: 'Editorial' },
-  { id: 5, title: 'Music Video', category: 'Music Videos' },
-  { id: 6, title: 'Lingerie Editorial', category: 'Lingerie' },
+const PORTFOLIO = [
+  { id: 1, title: 'Glamour — Red Editorial', category: 'Editorial', image: '/portfolio/glamour-red-coat.jpeg' },
+  { id: 2, title: 'Glamour — Yellow Jacket', category: 'Editorial', image: '/portfolio/glamour-yellow-jacket.jpeg' },
+  { id: 3, title: 'Photo Vogue — Track', category: 'Editorial', image: '/portfolio/vogue-track.jpeg' },
+  { id: 4, title: 'Beauty Closeup', category: 'Editorial', image: '/portfolio/beauty-closeup.jpg' },
+  { id: 5, title: 'Soft Curls Headshot', category: 'Headshots', image: '/portfolio/soft-curls-headshot.jpeg' },
+  { id: 6, title: 'Lace Blouse Editorial', category: 'Fashion', image: '/portfolio/lace-blouse-editorial.jpg' },
+  { id: 7, title: 'Satin Halter Dress', category: 'Fashion', image: '/portfolio/satin-halter-dress.jpeg' },
+  { id: 8, title: 'White Bodysuit', category: 'Fashion', image: '/portfolio/white-bodysuit.jpg' },
+  { id: 9, title: 'Leather & Boots', category: 'Fashion', image: '/portfolio/leather-boots-bw.jpg' },
+  { id: 10, title: 'Bomber Jacket', category: 'Fashion', image: '/portfolio/bomber-jacket.jpg' },
+  { id: 11, title: 'Fashion Week London', category: 'Runway', image: '/portfolio/runway-london.png' },
+  { id: 12, title: 'NYFW Show', category: 'Runway', image: '/portfolio/runway-nyfw.jpg' },
+  { id: 13, title: 'Art Nude — Studio', category: 'Art Nude', image: '/portfolio/art-nude-studio.jpg' },
+  { id: 14, title: 'Art Nude — Profile', category: 'Art Nude', image: '/portfolio/art-nude-profile.png' },
+  { id: 15, title: 'Artistic Closeup', category: 'Art Nude', image: '/portfolio/artistic-closeup.jpg' },
+  { id: 16, title: 'Feathered Collar', category: 'Creative', image: '/portfolio/feathered-collar.jpg' },
+  { id: 17, title: 'Crystal Editorial', category: 'Creative', image: '/portfolio/crystal-editorial.jpg' },
+  { id: 18, title: 'Beauty Mirror', category: 'Creative', image: '/portfolio/beauty-mirror.jpg' },
+  { id: 19, title: 'Comp — Tank Front', category: 'Digitals', image: '/portfolio/comp-tank-front.png' },
+  { id: 20, title: 'Comp — Jeans Side', category: 'Digitals', image: '/portfolio/comp-jeans-side.png' },
+  { id: 21, title: 'Comp — Jeans Profile', category: 'Digitals', image: '/portfolio/comp-jeans-profile.jpg' },
+  { id: 22, title: 'Comp — Bikini Side', category: 'Digitals', image: '/portfolio/comp-bikini-side.jpg' },
+  { id: 23, title: 'Comp — Bikini 3/4', category: 'Digitals', image: '/portfolio/comp-bikini-34.jpg' },
+  { id: 24, title: 'Comp — Bikini Front', category: 'Digitals', image: '/portfolio/comp-bikini-front.png' },
+  { id: 25, title: 'New York Weekly Feature', category: 'Press', image: '/portfolio/new-york-weekly.jpeg' },
 ]
 
 // ============================================
@@ -132,7 +151,7 @@ function PublicNav({ onBook, onDashboard }) {
 
 function HeroSection({ onBook }) {
   return (
-    <section className="hero">
+    <section className="hero" style={{ backgroundImage: 'url(/portfolio/leather-boots-bw.jpg)', backgroundSize: 'cover', backgroundPosition: 'center top' }}>
       <div className="hero-overlay" />
       <div className="hero-content">
         <p className="hero-label">Professional Model &bull; Actress &bull; Influencer</p>
@@ -178,10 +197,7 @@ function AboutSection() {
       <div className="container">
         <div className="about-grid">
           <div className="about-photo">
-            <div className="about-photo-placeholder">
-              <Camera size={48} strokeWidth={1} />
-              <span>Headshot</span>
-            </div>
+            <img src="/portfolio/beauty-closeup.jpg" alt="Makayla Me'chelle" className="about-photo-img" />
           </div>
           <div className="about-content">
             <p className="section-label">About</p>
@@ -217,8 +233,9 @@ function AboutSection() {
 
 function PortfolioSection() {
   const [filter, setFilter] = useState('All')
-  const categories = ['All', 'Fashion', 'Runway', 'Commercial', 'Editorial', 'Music Videos', 'Lingerie']
-  const filtered = filter === 'All' ? PORTFOLIO_PLACEHOLDER : PORTFOLIO_PLACEHOLDER.filter(p => p.category === filter)
+  const [lightbox, setLightbox] = useState(null)
+  const categories = ['All', 'Editorial', 'Fashion', 'Runway', 'Art Nude', 'Creative', 'Digitals', 'Headshots', 'Press']
+  const filtered = filter === 'All' ? PORTFOLIO : PORTFOLIO.filter(p => p.category === filter)
 
   return (
     <section id="portfolio" className="section-portfolio">
@@ -239,9 +256,9 @@ function PortfolioSection() {
         </div>
         <div className="portfolio-grid">
           {filtered.map(item => (
-            <div key={item.id} className="portfolio-card">
+            <div key={item.id} className="portfolio-card" onClick={() => setLightbox(item)}>
               <div className="portfolio-card-img">
-                <Camera size={32} strokeWidth={1} />
+                <img src={item.image} alt={item.title} loading="lazy" />
                 <span className="portfolio-card-badge">{item.category}</span>
               </div>
               <div className="portfolio-card-info">
@@ -250,10 +267,17 @@ function PortfolioSection() {
             </div>
           ))}
         </div>
-        <p className="portfolio-note">
-          Portfolio images coming soon — contact for full comp card and portfolio deck.
-        </p>
       </div>
+      {lightbox && (
+        <div className="lightbox" onClick={() => setLightbox(null)}>
+          <button className="lightbox-close" onClick={() => setLightbox(null)}><X size={28} /></button>
+          <img src={lightbox.image} alt={lightbox.title} onClick={e => e.stopPropagation()} />
+          <div className="lightbox-caption">
+            <h3>{lightbox.title}</h3>
+            <span>{lightbox.category}</span>
+          </div>
+        </div>
+      )}
     </section>
   )
 }
@@ -809,10 +833,10 @@ function PortfolioTab() {
     <div className="dash-tab">
       <DashHeader title="Portfolio" subtitle="Manage your work" />
       <div className="portfolio-mgmt-grid">
-        {PORTFOLIO_PLACEHOLDER.map(item => (
+        {PORTFOLIO.map(item => (
           <div key={item.id} className="portfolio-mgmt-card">
             <div className="portfolio-mgmt-img">
-              <Camera size={24} strokeWidth={1} />
+              <img src={item.image} alt={item.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
             <div className="portfolio-mgmt-info">
               <h4>{item.title}</h4>

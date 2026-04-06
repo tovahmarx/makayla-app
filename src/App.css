@@ -320,18 +320,11 @@
   align-items: start;
 }
 
-.about-photo-placeholder {
+.about-photo-img {
+  width: 100%;
   aspect-ratio: 3/4;
-  background: #F5F2EE;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  color: #888;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+  object-fit: cover;
+  object-position: center top;
 }
 
 .about-text {
@@ -425,6 +418,18 @@
   color: #888;
   position: relative;
   transition: transform 0.4s ease;
+  overflow: hidden;
+}
+
+.portfolio-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.portfolio-card:hover .portfolio-card-img img {
+  transform: scale(1.05);
 }
 
 .portfolio-card:hover .portfolio-card-img {
@@ -453,12 +458,67 @@
   font-weight: 500;
 }
 
-.portfolio-note {
+/* Lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(10,10,10,0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 40px;
+  cursor: pointer;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.lightbox img {
+  max-height: 80vh;
+  max-width: 90vw;
+  object-fit: contain;
+  cursor: default;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  color: #fff;
+  background: none;
+  border: none;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.lightbox-close:hover {
+  opacity: 1;
+}
+
+.lightbox-caption {
+  margin-top: 16px;
   text-align: center;
-  margin-top: 40px;
-  font-size: 0.85rem;
-  color: #888;
-  font-style: italic;
+  color: #fff;
+}
+
+.lightbox-caption h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin-bottom: 4px;
+}
+
+.lightbox-caption span {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #C9A96E;
 }
 
 /* Services */
