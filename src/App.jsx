@@ -16,41 +16,36 @@ const SERVICES = [
     id: 'lingerie',
     title: 'Lingerie & Art Nude',
     rate: '$150–250/hr',
-    icon: Camera,
     description: 'Editorial and artistic lingerie shoots. Professional, tasteful, high-fashion.',
-    image: null,
+    image: '/portfolio/art-nude-studio.jpg',
   },
   {
     id: 'fashion',
     title: 'Fashion',
     rate: '$100–200/hr',
-    icon: Shirt,
     description: 'Runway, editorial, lookbook, and commercial fashion photography.',
-    image: null,
+    image: '/portfolio/lace-blouse-editorial.jpg',
   },
   {
     id: 'music-videos',
     title: 'Music Videos',
     rate: '$400–800/day',
-    icon: Music,
     description: 'Featured and background roles in music videos. Casual rates from $100–150/hr.',
-    image: null,
+    image: '/portfolio/bomber-jacket.jpg',
   },
   {
     id: 'commercial',
     title: 'Commercial & TV',
     rate: 'Contact for rates',
-    icon: Film,
     description: 'Television commercials, reality TV appearances, brand campaigns.',
-    image: null,
+    image: '/portfolio/glamour-yellow-jacket.jpeg',
   },
   {
     id: 'runway',
     title: 'Runway & Events',
     rate: 'Contact for rates',
-    icon: Star,
     description: 'Fashion week, swim week, brand launches, and live event appearances.',
-    image: null,
+    image: '/portfolio/runway-london.png',
   },
 ]
 
@@ -290,25 +285,25 @@ function ServicesSection({ onBook }) {
         <h2 className="section-title text-center">What Can You Book Me For?</h2>
         <div className="section-divider center" />
         <div className="services-grid">
-          {SERVICES.map(svc => {
-            const Icon = svc.icon
-            return (
-              <div key={svc.id} className="service-card">
-                <div className="service-icon">
-                  <Icon size={28} strokeWidth={1.5} />
-                </div>
+          {SERVICES.map(svc => (
+            <div key={svc.id} className="service-card">
+              <div className="service-image">
+                <img src={svc.image} alt={svc.title} />
+                <div className="service-image-overlay" />
+              </div>
+              <div className="service-body">
                 <h3 className="service-title">{svc.title}</h3>
                 <p className="service-desc">{svc.description}</p>
                 <div className="service-rate">
                   <DollarSign size={14} />
                   <span>{svc.rate}</span>
                 </div>
-                <button className="btn btn-outline btn-sm" onClick={onBook} style={{ marginTop: 16, width: '100%' }}>
+                <button className="btn btn-primary btn-sm" onClick={onBook} style={{ marginTop: 16, width: '100%' }}>
                   Book This
                 </button>
               </div>
-            )
-          })}
+            </div>
+          ))}
         </div>
       </div>
     </section>
